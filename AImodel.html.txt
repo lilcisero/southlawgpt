@@ -1,0 +1,1 @@
+<!DOCTYPE html> <html> <head> <title>My Simple Website</title> </head> <body> <h1>Welcome to My Simple Website</h1> <p>This is a simple HTML file to get you started. Feel free to modify it to suit your needs!</p> </body> </html>
