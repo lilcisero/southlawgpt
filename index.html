@@ -1,10 +1,69 @@
-<!DOCTYPE html> 
-<html> 
-  <head> 
-    <title>SouthLawGPT</title> 
-  </head> 
-  <body> 
-    <h1>Welcome to SouthLawGPT turning 2.2 hours of legal research into ".2" </div></h1> 
-      <p>This is the index page!</p> 
-  </body> 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SouthLawGPT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Integration</title>
+    <style>
+        /* Add some basic styling */
+        body { font-family: Arial, sans-serif; }
+        .chat-container { border: 1px solid #ccc; padding: 10px; max-width: 400px; margin: auto; }
+        .chat-box { height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 5px; margin-bottom: 10px; }
+        .chat-input { width: calc(100% - 22px); padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to SouthLawGPT turning 2.2 hours of legal research into ".2"</h1>
+    <p>This is the index page!</p>
+
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box"></div>
+        <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const chatBox = document.getElementById('chat-box');
+            const chatInput = document.getElementById('chat-input');
+            const userMessage = chatInput.value;
+
+            // Display user's message
+            const userMessageElement = document.createElement('div');
+            userMessageElement.textContent = 'You: ' + userMessage;
+            chatBox.appendChild(userMessageElement);
+
+            // Clear the input field
+            chatInput.value = '';
+
+            console.log('Sending message to backend:', userMessage);
+
+            // Send user message to the backend
+            fetch('/chatbot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userMessage })
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response from backend:', data);
+
+                // Display chatbot response
+                const botMessageElement = document.createElement('div');
+                botMessageElement.textContent = 'Bot: ' + data.response;
+                chatBox.appendChild(botMessageElement);
+
+                // Scroll to the bottom of the chat box
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
 </html>
