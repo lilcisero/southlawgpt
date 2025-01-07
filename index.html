@@ -40,7 +40,7 @@
             console.log('Sending message to backend:', userMessage);
 
             // Send user message to the backend
-            fetch('http://127.0.0.1:4040', {  // Correct ngrok URL with endpoint
+            fetch('https://4c33-47-181-177-48.ngrok-free.app ', {  // Correct ngrok URL with endpoint
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userMessage })
