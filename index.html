@@ -40,10 +40,11 @@
             console.log('Sending message to backend:', userMessage);
 
             // Send user message to the backend
-            fetch('https://4c33-47-181-177-48.ngrok-free.app ', {  // Correct ngrok URL with endpoint
+            fetch('https://4c33-47-181-177-48.ngrok-free.app/chatbot', {  // Correct ngrok URL with endpoint
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: userMessage })
+                body: JSON.stringify({ message: userMessage }),
+                credentials: 'include'  // Include credentials in the request
             })
             .then(response => {
                 console.log('Response status:', response.status);
